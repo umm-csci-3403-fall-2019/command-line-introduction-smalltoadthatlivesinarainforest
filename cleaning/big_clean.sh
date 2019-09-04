@@ -1,12 +1,22 @@
 #!/bin/bash
 
+DIR_NAME=$1
+TMP_DIR=$2
+HERE=$(pwd)
+
 # need tar there is a flag for this that helps with cleaner extraction
+tar -zxf $DIR_NAME --directory $TMP_DIR
 
 # should remove all files that contain DELETE ME!
-for f in $2
-       
-# should create a new compressed tar archive that contains all the files
-# not including those that were scratched
+grep -lr "DELETE ME!" $TMP_DIR | xargs rm -fr
 
-#if there is a delete me, then we will not estract
-# else we will extract the file
+#create directory for the clean files labeled as clean
+#mkdir -p "cleaned_$DIR_NAME"
+
+cd $TMP_DIR
+
+#extract files from temp to cleaned big dir
+tar -zcf "$HERE"/"cleaned_$DIR_NAME"
+
+#remove temp dir
+#rm -rf $TMP_DIR
