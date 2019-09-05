@@ -16,7 +16,7 @@ grep -lr "DELETE ME!" $TMP_DIR | xargs rm -fr
 cd $TMP_DIR
 
 #extract files from temp to cleaned big dir
-tar -zcf "$HERE"/"cleaned_$DIR_NAME"
+tar -czf "$HERE/cleaned_$DIR_NAME" $(basename $DIR_NAME .tgz)
 
 #remove temp dir
 #rm -rf $TMP_DIR
